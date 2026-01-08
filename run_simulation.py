@@ -17,3 +17,7 @@ david_program = AnonymousTransmissionProgram(node_name="David", node_names=nodes
 # Run the simulation. Programs argument is a mapping of network node labels to programs to run on that node
 run(config=cfg, programs={"Alice": alice_program, "Bob": bob_program,
                           "Charlie": charlie_program, "David": david_program}, num_times=1)
+results = run(config=cfg, programs={"Alice": alice_program, "Bob": bob_program,
+                          "Charlie": charlie_program, "David": david_program}, num_times=1)
+
+print(f"Final Simulation Results: {results}")
