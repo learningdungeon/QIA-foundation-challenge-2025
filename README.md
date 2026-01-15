@@ -2,10 +2,10 @@
 ### QIA Foundation Challenge 2025 - Goal 5 Final Submission
 
 ## Overview
-The **RAQT (Robust Anonymous Quantum Transmission)** framework implements the Christandl-Wehner (2005) Anonymous Transmission protocol across a 30km, 4-node quantum relay. This project demonstrates how to achieve 100% communication accuracy in a noisy metropolitan environment (0.97 Fidelity) using a combination of quantum phase-flip encoding and a **Dual-Engine** validation approach.
+The **RAQT (Robust Anonymous Quantum Transmission)** framework implements the Christandl-Wehner (2005) Anonymous Transmission protocol across a 30km, 4-node quantum relay. This project demonstrates 100% communication accuracy in a noisy metropolitan environment (0.97 Fidelity) using quantum phase-flip encoding and classical error mitigation via NetSquid.
 
 ## Research Foundation
-The logic implemented here is based on the protocol described in:
+The logic is based on the protocol described in:
 > **"Quantum Anonymous Transmissions"**
 > *Authors: Matthias Christandl and Stephanie Wehner*
 > *Reference: arXiv:quant-ph/0409201v2 (Protocol definition, Page 10)*
@@ -29,22 +29,23 @@ To meet the high-reliability requirements of the QIA Challenge, the protocol is 
 
 
 
-## Dual-Engine Validation Strategy
-This project utilizes two simulation environments to guarantee results:
-1. **NetSquid (Primary):** Located in `run_simulation.py`. This models the physical fiber delays, hardware noise, and discrete-event timing for the 30km relay.
-2. **Qiskit (Digital Twin):** Located in `QIAPractice1.ipynb`. This serves as a mathematical verification of the parity logic under ideal conditions to ensure the protocol code is logically sound.
+## Validation Strategy
+This project utilizes the **NetSquid** discrete-event simulation environment to model the physical layer:
+- **Primary Execution:** `run_simulation.py` handles the physical fiber delays, hardware noise, and timing.
+- **Protocol Logic:** `application.py` manages the quantum gate operations and error correction.
 
 ## Project Structure
 * `application.py`: Core quantum gate logic and the Majority-Vote algorithm.
 * `run_simulation.py`: Physical network configuration, timing delays, and Goal 5 metrics loop.
-* `QIAPractice1.ipynb`: Qiskit Digital Twin for logic verification (verified for character 'a').
+* `config.yaml`: Hardware-realistic parameters (0.5s coherence times, 10km node spacing).
 
 ## Final Performance Metrics
 * **Success Probability:** 100.00% (Achieved via Majority Vote over 100 trials).
-* **Throughput:** ~14.07 Bytes/sec (Accounting for repetition code overhead).
+* **Throughput:** ~14.5332 Bytes/sec (counting for repetition code overhead).
 * **Fidelity resilience:** 0.97.
 
 ## How to Run
-1. **NetSquid Simulation:**
+1. Ensure `netsquid` and `squidasm` are installed.
+2. Execute the simulation:
    ```bash
    python run_simulation.py
