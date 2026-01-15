@@ -53,3 +53,29 @@ This project is licensed under the **MIT License**.
 
 *IBM Qiskit Advocate | Friend of OQI.CERN | GRSS QUEST | Quantum Curriculum Developer | Quantum Learner*
 
+=======
+# RAQT: Robust Anonymous Quantum Transmission
+### QIA Foundation Challenge 2025 - Goal 5 Submission
+
+## Overview
+The RAQT framework implements the Christandl-Wehner (2005) Anonymous Transmission protocol across a 30km, 4-node quantum relay. This project demonstrates how to achieve 100% communication accuracy in a noisy metropolitan environment (0.97 Fidelity) using a combination of quantum phase-flip encoding and classical error mitigation.
+
+## Technical Architecture
+- **Topology:** Linear chain (Alice -> Bob -> Charlie -> David).
+- **Distance:** 30km (3 x 10km fiber spans).
+- **Noise Model:** 0.03 Depolarizing Rate (3% error).
+- **Protocol:** Anonymous Z-gate encoding with X-basis parity extraction.
+- **Error Correction:** Length-3 Quantum Repetition Code with Majority-Vote logic.
+
+## Project Structure
+- `application.py`: Contains the core quantum gate logic (Z-gates, H-gates) and the Majority Vote algorithm.
+- `run_simulation.py`: Defines the physical network, timing delays, and the metrics execution loop.
+
+## How to Run
+1. Ensure `netsquid` is installed in your environment.
+2. Run the main simulation:
+   ```bash
+   python run_simulation.py
+
+git add README.md
+git rebase --continue
