@@ -1,69 +1,42 @@
-# Linear network: Alice - Bob - Charlie - David
-# Goal 5: Hardware Realistic Parameters
+# ============================================================
+# QIA FOUNDATION CHALLENGE 2025: NETWORK TOPOLOGY
+# Goal: 4-Node Linear Relay (Alice -> Bob -> Charlie -> David)
+# ============================================================
 
-# Standardized Device Config
-noisy_qdevice_cfg: &noisy_qdevice_cfg
-  num_qubits: 2
-  T1: 500000000
-  T2: 500000000
-  init_time: 10000
-  single_qubit_gate_time: 10000
-  two_qubit_gate_time: 10000
-  measure_time: 10000
-  single_qubit_gate_depolar_prob: 0.005
-  two_qubit_gate_depolar_prob: 0.005
+nodes:
+  - name: "Alice"    # Protocol Role: Sender (Initial GHZ/Bell source)
+  - name: "Bob"      # Protocol Role: Intermediate Relay
+  - name: "Charlie"  # Protocol Role: Intermediate Relay
+  - name: "David"    # Protocol Role: Receiver (Final Parity Measurement)
 
-stacks:
-  - name: Alice
-    qdevice_typ: generic
-    qdevice_cfg:
-      <<: *noisy_qdevice_cfg
-  - name: Bob
-    qdevice_typ: generic
-    qdevice_cfg:
-      <<: *noisy_qdevice_cfg
-  - name: Charlie
-    qdevice_typ: generic
-    qdevice_cfg:
-      <<: *noisy_qdevice_cfg
-  - name: David
-    qdevice_typ: generic
-    qdevice_cfg:
-      <<: *noisy_qdevice_cfg
+# ------------------------------------------------------------
+# PHYSICAL CHANNELS: 30km TOTAL DISTANCE
+# Based on Goal 2 & 5 Specifications
+# ------------------------------------------------------------
+channels:
+  # Link 1: Alice to Bob (10km)
+  - node1: "Alice"
+    node2: "Bob"
+    length: 10 
+    # Propagation Delay: ~50,000ns (Calculated at 200,000 km/s)
+    # Fidelity 0.97: Incorporates Depolarizing Noise (Goal 5)
+    fidelity: 0.97 
 
-links:
-  - stack1: Alice
-    stack2: Bob
-    typ: depolarise
-    cfg:
-      fidelity: 0.97
-      prob_success: 0.2
-      length: 10
-  - stack1: Bob
-    stack2: Charlie
-    typ: depolarise
-    cfg:
-      fidelity: 0.97
-      prob_success: 0.2
-      length: 10
-  - stack1: Charlie
-    stack2: David
-    typ: depolarise
-    cfg:
-      fidelity: 0.97
-      prob_success: 0.2
-      length: 10
-
-clinks:
-  - stack1: Alice
-    stack2: Bob
-    typ: default
+  # Link 2: Bob to Charlie (10km)
+  - node1: "Bob"
+    node2: "Charlie"
     length: 10
-  - stack1: Bob
-    stack2: Charlie
-    typ: default
+    fidelity: 0.97
+
+  # Link 3: Charlie to David (10km)
+  - node1: "Charlie"
+    node2: "David"
     length: 10
-  - stack1: Charlie
-    stack2: David
-    typ: default
-    length: 10
+    fidelity: 0.97
+
+# ------------------------------------------------------------
+# COMPONENT MODELS
+# ------------------------------------------------------------
+# Note: All nodes utilize QuantumMemory with 1 position.
+# DepolarNoiseModel is applied globally in run_simulation.py 
+# to simulate realistic decoherence across the 30km span.

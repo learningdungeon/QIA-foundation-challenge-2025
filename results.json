@@ -1,0 +1,22 @@
+{
+  "config_file": "config_noisy.yaml",
+  "num_simulations": 100,
+  "without_error_correction": {
+    "success_rate": 0.0,
+    "avg_time_ns": Infinity,
+    "speed_bytes_per_sec": 0,
+    "success_count": 0,
+    "total_runs": 100
+  },
+  "with_error_correction": {
+    "success_rate": 0.0,
+    "avg_time_ns": Infinity,
+    "speed_bytes_per_sec": 0,
+    "success_count": 0,
+    "total_runs": 100
+  },
+  "comparison": {
+    "success_improvement_percent": 0,
+    "speed_change_percent": 0
+  }
+}

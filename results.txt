@@ -1,0 +1,14 @@
+QIA Foundation Challenge 2025 Results
+========================================
+
+Without Error Correction:
+  Success Probability: 0.000
+  Transmission Speed: 0.00 bytes/sec
+
+With Error Correction:
+  Success Probability: 0.000
+  Transmission Speed: 0.00 bytes/sec
+
+Improvement Analysis:
+  Success Probability Change: +0.0%
+  Transmission Speed Change: +0.0%
